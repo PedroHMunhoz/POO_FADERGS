@@ -21,3 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/Aula02_IntroducaoLinguagemJava/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/build/
+/Aula02_IntroducaoLinguagemJava/Exercicio1_FraseNaTela/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/Exercicio1_FraseNaTela/build/
+/Aula02_IntroducaoLinguagemJava/Exercicio2_Etiqueta/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/Exercicio2_Etiqueta/build/
+/Aula02_IntroducaoLinguagemJava/Exercicio3_QuadradoNaTela/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/Exercicio3_QuadradoNaTela/build/
+/Aula02_IntroducaoLinguagemJava/Exercicio4_PinheiroNaTela/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/Exercicio4_PinheiroNaTela/build/
+/Aula02_IntroducaoLinguagemJava/Exercicio5_TabelaNotas/nbproject/private/
+/Aula02_IntroducaoLinguagemJava/Exercicio5_TabelaNotas/build/
