@@ -14,7 +14,7 @@ public class Aluno {
     private float nota2;
     private float nota3;
     private float nota4;
-
+    
     public int getMatricula() {
         return matricula;
     }
@@ -61,5 +61,9 @@ public class Aluno {
 
     public void setNota4(float nota4) {
         this.nota4 = nota4;
+    }
+
+    public float calcularMedia() {
+        return (this.nota1 + this.nota2 + this.nota3 + this.nota4) / 4;
     }
 }

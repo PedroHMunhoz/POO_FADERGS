@@ -11,6 +11,10 @@ public class Curso {
     private String horario;    
     private Professor professor;
     private ArrayList<Aluno> listaAlunos;
+    
+    public Curso(){
+        this.listaAlunos = new ArrayList<Aluno>();
+    }
 
     public String getNome() {
         return nome;
