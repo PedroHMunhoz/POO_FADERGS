@@ -7,6 +7,7 @@ package View;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ViewJTable extends javax.swing.JFrame {
      */
     public ViewJTable() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+        tblProdutos.setRowSorter(new TableRowSorter(modelo));
     }
 
     /**
@@ -66,18 +69,15 @@ public class ViewJTable extends javax.swing.JFrame {
             new String [] {
                 "Descrição", "Quantidade", "Preço"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblProdutosMouseClicked(evt);
+            }
+        });
+        tblProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblProdutosKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblProdutos);
@@ -166,6 +166,7 @@ public class ViewJTable extends javax.swing.JFrame {
         DefaultTableModel dtmProdutos = (DefaultTableModel) tblProdutos.getModel();
         Object[] dados = {txtDescricao.getText(), txtQuantidade.getText(), txtPreco.getText()};
         dtmProdutos.addRow(dados);
+        limparCampos();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -174,6 +175,7 @@ public class ViewJTable extends javax.swing.JFrame {
 
         if (linhaSelecionada > -1) {
             dtmProdutos.removeRow(linhaSelecionada);
+            limparCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada para excluir!");
         }
@@ -186,6 +188,7 @@ public class ViewJTable extends javax.swing.JFrame {
             tblProdutos.setValueAt(txtDescricao.getText(), linhaSelecionada, 0);
             tblProdutos.setValueAt(txtQuantidade.getText(), linhaSelecionada, 1);
             tblProdutos.setValueAt(txtPreco.getText(), linhaSelecionada, 2);
+            limparCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada para atualizar!");
         }
@@ -204,6 +207,16 @@ public class ViewJTable extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblProdutosMouseClicked
 
+    private void tblProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProdutosKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblProdutosKeyReleased
+
+    private void limparCampos()
+    {
+        txtDescricao.setText("");
+        txtQuantidade.setText("");
+        txtPreco.setText("");
+    }
     /**
      * @param args the command line arguments
      */
