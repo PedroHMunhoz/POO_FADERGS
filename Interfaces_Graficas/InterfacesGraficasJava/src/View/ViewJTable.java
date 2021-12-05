@@ -41,6 +41,7 @@ public class ViewJTable extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("JTable");
@@ -65,13 +66,33 @@ public class ViewJTable extends javax.swing.JFrame {
             new String [] {
                 "Descrição", "Quantidade", "Preço"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProdutos);
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -85,7 +106,9 @@ public class ViewJTable extends javax.swing.JFrame {
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir))
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAtualizar))
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +140,8 @@ public class ViewJTable extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnAtualizar))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -139,23 +163,46 @@ public class ViewJTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        DefaultTableModel dtmProdutos = (DefaultTableModel)tblProdutos.getModel();
+        DefaultTableModel dtmProdutos = (DefaultTableModel) tblProdutos.getModel();
         Object[] dados = {txtDescricao.getText(), txtQuantidade.getText(), txtPreco.getText()};
         dtmProdutos.addRow(dados);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linhaSelecionada = tblProdutos.getSelectedRow();
-        DefaultTableModel dtmProdutos = (DefaultTableModel)tblProdutos.getModel();
-        
-        if(linhaSelecionada > -1){
+        DefaultTableModel dtmProdutos = (DefaultTableModel) tblProdutos.getModel();
+
+        if (linhaSelecionada > -1) {
             dtmProdutos.removeRow(linhaSelecionada);
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada para excluir!");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        int linhaSelecionada = tblProdutos.getSelectedRow();
+
+        if (linhaSelecionada > -1) {
+            tblProdutos.setValueAt(txtDescricao.getText(), linhaSelecionada, 0);
+            tblProdutos.setValueAt(txtQuantidade.getText(), linhaSelecionada, 1);
+            tblProdutos.setValueAt(txtPreco.getText(), linhaSelecionada, 2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada para atualizar!");
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
+        int linhaSelecionada = tblProdutos.getSelectedRow();
+        DefaultTableModel dtmProdutos = (DefaultTableModel) tblProdutos.getModel();
+
+        if (linhaSelecionada > -1) {
+            txtDescricao.setText(tblProdutos.getValueAt(linhaSelecionada, 0).toString());
+            txtQuantidade.setText(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
+            txtPreco.setText(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada para atualizar!");
+        }
+    }//GEN-LAST:event_tblProdutosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -193,6 +240,7 @@ public class ViewJTable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane1;
