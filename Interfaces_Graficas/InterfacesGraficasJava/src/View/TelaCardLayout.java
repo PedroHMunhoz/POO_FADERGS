@@ -38,6 +38,7 @@ public class TelaCardLayout extends javax.swing.JFrame {
         mnuNovembroAzul = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Card Layout");
 
         pnlPrincipal.setLayout(new java.awt.CardLayout());
 
