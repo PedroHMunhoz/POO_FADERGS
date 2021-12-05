@@ -116,7 +116,7 @@ public class TelaLoginModal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(txtLogin.getText().equals("maria") || txtSenha.getPassword().equals("12345")){        
+        if(txtLogin.getText().equals("maria") && new String(txtSenha.getPassword()).trim().equals("12345")){        
             login = txtLogin.getText();
             senha = txtSenha.getPassword().toString();
             this.dispose();

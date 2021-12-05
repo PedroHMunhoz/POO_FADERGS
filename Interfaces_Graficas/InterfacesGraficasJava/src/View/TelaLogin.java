@@ -5,6 +5,7 @@
  */
 package View;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +13,9 @@ import javax.swing.JOptionPane;
  * @author Pedro
  */
 public class TelaLogin extends javax.swing.JFrame {
+
+    public String login;
+    public String senha;
 
     /**
      * Creates new form TelaLogin
@@ -44,6 +48,12 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1.setText("Login");
 
         jLabel2.setText("Senha");
+
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,15 +120,27 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(txtLogin.getText().equals("usuario") || txtSenha.getPassword().equals("12345"))
-        {
+
+        if (this.checkLogin(txtLogin.getText(), txtSenha.getPassword().toString().trim())) {
             JOptionPane.showMessageDialog(null, "Bem vindo!");
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!!");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    public boolean checkLogin(String login, String senha) {
+        return (login.equals("usuario") && senha.equals("123"));
+    }
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (this.checkLogin(txtLogin.getText(), new String(txtSenha.getPassword()).trim())) {
+                JOptionPane.showMessageDialog(null, "Bem vindo!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!!");
+            }
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**
      * @param args the command line arguments
